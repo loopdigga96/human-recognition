@@ -42,5 +42,5 @@ model = Model(inputs=[input_a, input_b], outputs=prediction)
 
 model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy', f1, recall, precision])
 
-loss=binary_crossentropy, optimizer=sgd, BATCH_S=100, epoch=200, patience=45
-eer=10% val_acc=0.78673715026409308
+loss=binary_crossentropy, optimizer=sgd, BATCH_S=100, epoch=200, patience=10 LR=0.01
+eer=10.3% acc=0.78673715026409308

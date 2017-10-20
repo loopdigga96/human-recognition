@@ -23,15 +23,16 @@ from tqdm import tqdm
 from scipy.spatial.distance import euclidean, braycurtis, canberra, chebyshev, cosine, minkowski
 
 
-EPOCHS = 1
+EPOCHS = 200
 BATCH_S = 100
-PATIENCE = 45
+PATIENCE = 10
 MODEL_PATH = 'models/'.format(EPOCHS, BATCH_S)
 MODEL_NAME = 'mlp{}_b{}_bn_euc_dist.h5'.format(EPOCHS, BATCH_S)
 HISTORY_PATH = 'history/'
 HISTORY_NAME = 'mlp{}_b{}_bn_euc_dist.h5'.format(EPOCHS, BATCH_S)
 TRAIN_PATH = 'dataset/train/shuffled+duplicates.h5'
 TEST_PATH = 'dataset/test/test.h5'
+LR = 0.01
 
 
 def save_dataframe(path, df):
@@ -171,7 +172,9 @@ prediction = Dense(1, activation='sigmoid')(eucl_distance)
 
 model = Model(inputs=[input_a, input_b], outputs=prediction)
 
-model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy', f1, recall, precision])
+opt = SGD(lr=LR)
+
+model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy', f1, recall, precision])
 model.summary()
 
 
