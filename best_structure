@@ -1,0 +1,46 @@
+def create_bn_network(input_dim):
+    inp = Input(shape=(input_dim, ))
+    dense1 = Dense(128)(inp)
+    bn1 = BatchNormalization()(dense1)
+    relu1 = Activation('relu')(bn1)
+
+    dense2 = Dense(128)(relu1)
+    bn2 = BatchNormalization()(dense2)
+    res2 = Add()([relu1, bn2])
+    relu2 = Activation('relu')(res2)
+
+    dense3 = Dense(128)(relu2)
+    bn3 = BatchNormalization()(dense3)
+    res3 = Add()([relu2, bn3])
+    relu3 = Activation('relu')(res3)
+
+    feats = Concatenate()([relu3, relu2, relu1])
+    bn4 = BatchNormalization()(feats)
+
+    model = Model(inputs=inp, outputs=bn4)
+
+    return model
+
+
+input_dim = 400
+
+base_network = create_bn_network(input_dim)
+
+input_a = Input(shape=(input_dim,))
+input_b = Input(shape=(input_dim,))
+
+processed_a = base_network(input_a)
+processed_b = base_network(input_b)
+
+
+eucl_distance = Lambda(euclidean_distance,
+                       output_shape=eucl_dist_output_shape)([processed_a, processed_b])
+
+prediction = Dense(1, activation='sigmoid')(eucl_distance)
+
+model = Model(inputs=[input_a, input_b], outputs=prediction)
+
+model.compile(loss='binary_crossentropy', optimizer='sgd', metrics=['accuracy', f1, recall, precision])
+
+loss=binary_crossentropy, optimizer=sgd, BATCH_S=100, epoch=200, patience=45
+eer=10% val_acc=0.78673715026409308
