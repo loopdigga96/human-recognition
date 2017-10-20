@@ -9,7 +9,7 @@ Classification algorithm for classification human, on biometric data, using siam
 
 # Best result
 - **EER = 10%**
-- model - **'models/best_model.h5'**
+- model - **'models/model_err=10.3.h5'**
 - model structure - **'best_structure'**
 
 # Training
