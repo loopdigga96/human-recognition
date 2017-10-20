@@ -23,7 +23,7 @@ from tqdm import tqdm
 from scipy.spatial.distance import euclidean, braycurtis, canberra, chebyshev, cosine, minkowski
 
 
-EPOCHS = 1
+EPOCHS = 200
 BATCH_S = 100
 PATIENCE = 45
 MODEL_PATH = 'models/'.format(EPOCHS, BATCH_S)
