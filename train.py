@@ -218,7 +218,7 @@ y_val       = val_df.is_duplicate.values
 batch_total = get_number_of_batches(x_left, BATCH_S)
 val_steps = get_number_of_batches(x_left_val, BATCH_S)
 
-callbacks = [ModelCheckpoint(MODEL_PATH+MODEL_NAME, monitor='val_loss', save_best_only=False),
+callbacks = [ModelCheckpoint(MODEL_PATH+MODEL_NAME, monitor='val_loss', save_best_only=True),
              EarlyStopping(monitor='val_loss', patience=PATIENCE, verbose=1, mode='auto')
             ]
 
