@@ -11,6 +11,7 @@ Classification algorithm for classification human, on biometric data, using siam
 - **EER = 10%**
 - model - **'models/model_err=10.3.h5'**
 - model structure - **'best_structure'**
+- best-prediction - **'predictions/best_prediction.5.npy'**
 
 # Training
 On GeForce GTX 760 CUDA
